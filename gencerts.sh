@@ -4,7 +4,7 @@ openssl req -new -x509 -nodes -subj '/CN=Whitelist Registry Controller Webook' -
 # server key
 openssl genrsa -out server.key 2048
 # CSR
-openssl req -new -key server.key -subj '/CN=whitelist-registry.validation.svc' -out server.csr
+openssl req -new -key server.key -subj '/CN=whitelist-registry.default.svc' -out server.csr
 # server certificate
 openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt 
 
