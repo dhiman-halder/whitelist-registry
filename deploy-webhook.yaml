@@ -18,7 +18,7 @@ metadata:
   name: whitelist-registry
 spec:
   containers:
-  - image: dhiman-halder/whitelist-registry:1.0
+  - image: dhimanhalder/whitelist-registry:1.0
     name: whitelist-registry
     imagePullPolicy: Always
     ports:
