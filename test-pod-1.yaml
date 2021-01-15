@@ -5,4 +5,4 @@ metadata:
 spec:
   containers:
   - name: nginx
-    image: gcr.io/google-containers/nginx:latest
+    image: docker.io/nginx:latest
