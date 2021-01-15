@@ -20,6 +20,9 @@ spec:
   containers:
   - image: dhimanhalder/whitelist-registry:1.0
     name: whitelist-registry
+    env:
+    - name: WHITELISTED_REGISTRIES
+      value: "docker.io,gcr.io"
     imagePullPolicy: Always
     ports:
     - containerPort: 8443

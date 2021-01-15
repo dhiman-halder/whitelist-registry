@@ -24,8 +24,15 @@ app.post('/', (req, res) => {
   var message = "";
   const uid = req.body.request.uid;
   const object = req.body.request.object;
+  var whitelisted_registries = process.env.WHITELISTED_REGISTRIES.split(',');
   for (var container of object.spec.containers) {
-      if (!container.image.startsWith('docker.io/')) {
+      var whitelisted = false;
+      for (var reg in whitelisted_registries) {
+        if (container.image.startsWith(reg + '/')) {
+          whitelisted = true;
+        }
+      }
+      if (!whitelisted) {
           allowed = false;
           code = 403;
           message = `${container.name} image comes from an untrusted registry! Only images from docker.io are allowed.`;
