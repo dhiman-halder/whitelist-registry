@@ -31,13 +31,13 @@ app.post('/', (req, res) => {
       var whitelisted = false;
       for (var reg of whitelisted_registries) {
         if (container.image.startsWith(reg + '/')) {
-          whitelisted = true;
+            whitelisted = true;
         }
       }
       if (!whitelisted) {
           allowed = false;
           code = 403;
-          message = `${container.name} image comes from an untrusted registry! Only images from ${whitelisted_registries_env} are allowed.`;
+          message = `${container.name} image comes from an untrusted registry! (${container.image}). Only images from ${whitelisted_registries_env} are allowed.`;
           break;
       }
   }
