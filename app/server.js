@@ -24,10 +24,12 @@ app.post('/', (req, res) => {
   var message = "";
   const uid = req.body.request.uid;
   const object = req.body.request.object;
-  var whitelisted_registries = process.env.WHITELISTED_REGISTRIES.split(',');
+  
+  const whitelisted_registries_env = process.env.WHITELISTED_REGISTRIES;
+  const whitelisted_registries = whitelisted_registries_env.split(',');
   for (var container of object.spec.containers) {
       var whitelisted = false;
-      for (var reg in whitelisted_registries) {
+      for (var reg of whitelisted_registries) {
         if (container.image.startsWith(reg + '/')) {
           whitelisted = true;
         }
@@ -35,7 +37,7 @@ app.post('/', (req, res) => {
       if (!whitelisted) {
           allowed = false;
           code = 403;
-          message = `${container.name} image comes from an untrusted registry! Only images from docker.io are allowed.`;
+          message = `${container.name} image comes from an untrusted registry! Only images from ${whitelisted_registries_env} are allowed.`;
           break;
       }
   }
